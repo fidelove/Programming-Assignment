@@ -63,10 +63,27 @@ public abstract class AbstractRequestHandler implements Route {
 
 	@Override
 	public Object handle(Request request, Response response) throws Exception {
-		HandlerResponseBean handlerResponse = handle(request.params(), request.body());
-		response.status(handlerResponse.getStatus());
-		response.body(handlerResponse.getBody());
-		return handlerResponse.getBody();
+
+		if (isJSONValid(request.body())) {
+
+			HandlerResponseBean handlerResponse = handle(request.params(), request.body());
+			response.status(handlerResponse.getStatus());
+			response.body(handlerResponse.getBody());
+			return handlerResponse.getBody();
+
+		} else {
+			return "{ error : \"Request does not contain a valid JSON\"}";
+		}
+
+	}
+
+	protected boolean isJSONValid(String jsonString) {
+		try {
+			gson.fromJson(jsonString, Object.class);
+			return true;
+		} catch (com.google.gson.JsonSyntaxException ex) {
+			return false;
+		}
 	}
 
 	/**
@@ -80,8 +97,13 @@ public abstract class AbstractRequestHandler implements Route {
 	 * @return The companyBean
 	 */
 	protected CompanyBean getCompanyById(Map<String, String> map) {
-		String idCompany = map.get(":idCompany");
-		return mapCompanies.get(Long.parseLong(idCompany));
+
+		try {
+			Long idCompany = Long.parseLong(map.get(":idcompany"));
+			return mapCompanies.get(idCompany);
+		} catch (NumberFormatException e) {
+			return null;
+		}
 	}
 
 	/**

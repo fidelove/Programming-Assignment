@@ -49,7 +49,8 @@ public class AddOwnerRequestHandler extends AbstractRequestHandler {
 			}
 
 		} else {
-			response = new HandlerResponseBean(400, "{ error : \"Company does not exist\"}");
+			response = new HandlerResponseBean(400,
+					"{ error : \"Company does not exist. Please send the correct idCompany\"}");
 		}
 
 		return response;

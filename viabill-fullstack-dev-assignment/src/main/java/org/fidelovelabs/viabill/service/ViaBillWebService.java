@@ -31,8 +31,8 @@ public class ViaBillWebService {
 
 		post("/createCompany", new CreateCompanyRequestHandler(mapCompanies, idCompany));
 		get("/getCompanies", new GetCompaniesRequestHandler(mapCompanies));
-		get("/getCompany/:idCompany", new GetCompanyDetailsRequestHandler(mapCompanies));
-		put("/updateCompany/:idCompany", new UpdateCompanyDetailsRequestHandler(mapCompanies));
-		put("/addOwner/:idCompany", new AddOwnerRequestHandler(mapCompanies));
+		get("/getCompany/:idcompany", new GetCompanyDetailsRequestHandler(mapCompanies));
+		put("/updateCompany/:idcompany", new UpdateCompanyDetailsRequestHandler(mapCompanies));
+		put("/addOwner/:idcompany", new AddOwnerRequestHandler(mapCompanies));
 	}
 }

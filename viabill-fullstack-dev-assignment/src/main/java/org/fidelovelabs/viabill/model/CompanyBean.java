@@ -1,11 +1,14 @@
 package org.fidelovelabs.viabill.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-public class CompanyBean {
+public class CompanyBean implements Serializable {
+
+	private static final long serialVersionUID = 8080727923661840629L;
 
 	private long idCompany;
 	@NotEmpty

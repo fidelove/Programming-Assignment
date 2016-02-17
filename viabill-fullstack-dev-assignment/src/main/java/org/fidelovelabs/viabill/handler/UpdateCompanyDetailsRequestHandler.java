@@ -22,8 +22,7 @@ public class UpdateCompanyDetailsRequestHandler extends AbstractRequestHandler {
 
 		try {
 
-			Long idCompany = Long.parseLong(map.get(":idCompany"));
-			CompanyBean companyBean = mapCompanies.get(idCompany);
+			CompanyBean companyBean = getCompanyById(map);
 
 			if (companyBean != null) {
 
@@ -41,7 +40,7 @@ public class UpdateCompanyDetailsRequestHandler extends AbstractRequestHandler {
 
 				} else {
 
-					updateRequest.setIdCompany(idCompany);
+					updateRequest.setIdCompany(companyBean.getIdCompany());
 					updateRequest
 							.setName(updateRequest.getName() != null ? updateRequest.getName() : companyBean.getName());
 					updateRequest.setAddress(
@@ -59,8 +58,8 @@ public class UpdateCompanyDetailsRequestHandler extends AbstractRequestHandler {
 					Set<ConstraintViolation<CompanyBean>> validate = validator.validate(updateRequest);
 
 					if (validate.isEmpty()) {
-						mapCompanies.replace(idCompany, updateRequest);
-						response = new HandlerResponseBean(200, gson.toJson(companyBean, CompanyBean.class));
+						mapCompanies.replace(updateRequest.getIdCompany(), updateRequest);
+						response = new HandlerResponseBean(200, gson.toJson(updateRequest, CompanyBean.class));
 
 					} else {
 						response = new HandlerResponseBean(400,
