@@ -3,7 +3,7 @@ ViaBill Programming Assignment
 
 This is the implementation of the Application Assigment proposed by ViaBill.
 
-Next frameworks have been used for developing the backend service:
+These frameworks have been used for developing the backend service:
 
   1. [Spark](http://sparkjava.com/) : as Java web framework.
   2. [Hazelcast](http://hazelcast.org/) : as local storage support.
