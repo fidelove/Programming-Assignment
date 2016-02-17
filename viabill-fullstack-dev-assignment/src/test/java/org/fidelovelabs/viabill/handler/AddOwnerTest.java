@@ -35,7 +35,7 @@ public class AddOwnerTest {
 	public void addOwnerOk() {
 
 		Map<String, String> map = new HashMap<String, String>();
-		map.put(":idCompany", "123");
+		map.put(":idcompany", "123");
 		List<String> newOwner = Arrays.asList("owner2");
 		HandlerResponseBean response = requestHandler.handle(map, gson.toJson(newOwner));
 
@@ -50,7 +50,7 @@ public class AddOwnerTest {
 	public void addOwnerUnexistingCompany() {
 
 		Map<String, String> map = new HashMap<String, String>();
-		map.put(":idCompany", "1234");
+		map.put(":idcompany", "1234");
 		List<String> newOwner = Arrays.asList("owner");
 		HandlerResponseBean response = requestHandler.handle(map, gson.toJson(newOwner));
 
@@ -70,7 +70,7 @@ public class AddOwnerTest {
 	public void addDuplicatedOwner() {
 
 		Map<String, String> map = new HashMap<String, String>();
-		map.put(":idCompany", "123");
+		map.put(":idcompany", "123");
 		List<String> newOwner = Arrays.asList("owner1");
 		HandlerResponseBean response = requestHandler.handle(map, gson.toJson(newOwner));
 

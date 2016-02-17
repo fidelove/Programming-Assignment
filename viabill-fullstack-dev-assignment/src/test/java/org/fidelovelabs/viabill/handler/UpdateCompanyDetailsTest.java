@@ -35,7 +35,7 @@ public class UpdateCompanyDetailsTest {
 	public void updateCompanyDetailsOk() {
 
 		Map<String, String> map = new HashMap<String, String>();
-		map.put(":idCompany", "123");
+		map.put(":idcompany", "123");
 		CompanyBean updateCompany = new CompanyBean();
 		updateCompany.setName("newNameCompany");
 		HandlerResponseBean response = requestHandler.handle(map, gson.toJson(updateCompany));
@@ -50,7 +50,7 @@ public class UpdateCompanyDetailsTest {
 	public void updateCompanyDetailsUnexistingCompany() {
 
 		Map<String, String> map = new HashMap<String, String>();
-		map.put(":idCompany", "1234");
+		map.put(":idcompany", "1234");
 		CompanyBean updateCompany = new CompanyBean();
 		updateCompany.setName("newNameCompany");
 		HandlerResponseBean response = requestHandler.handle(map, gson.toJson(updateCompany));
@@ -66,7 +66,7 @@ public class UpdateCompanyDetailsTest {
 	public void updateCompanyErasingMandatoryFields() {
 
 		Map<String, String> map = new HashMap<String, String>();
-		map.put(":idCompany", "123");
+		map.put(":idcompany", "123");
 		CompanyBean updateCompany = new CompanyBean();
 		updateCompany.setName("");
 		HandlerResponseBean response = requestHandler.handle(map, gson.toJson(updateCompany));
@@ -82,7 +82,7 @@ public class UpdateCompanyDetailsTest {
 	public void updateCompanyWrongEmailAddress() {
 
 		Map<String, String> map = new HashMap<String, String>();
-		map.put(":idCompany", "123");
+		map.put(":idcompany", "123");
 		CompanyBean updateCompany = new CompanyBean();
 		updateCompany.setEmail("wrongEmail");
 		;

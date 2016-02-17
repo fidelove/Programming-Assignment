@@ -34,7 +34,7 @@ public class GetCompanyDetailsTest {
 		mapCompanies.put(Long.valueOf(123), companyBean);
 
 		Map<String, String> map = new HashMap<String, String>();
-		map.put(":idCompany", "123");
+		map.put(":idcompany", "123");
 		HandlerResponseBean response = requestHandler.handle(map, "");
 
 		assertEquals("The request should have succeed", 200, response.getStatus());
@@ -47,7 +47,7 @@ public class GetCompanyDetailsTest {
 	public void getUnexistingCompanyDetails() {
 
 		Map<String, String> map = new HashMap<String, String>();
-		map.put(":idCompany", "123");
+		map.put(":idcompany", "123");
 		HandlerResponseBean response = requestHandler.handle(map, "");
 
 		assertEquals("The company should not exist", 400, response.getStatus());
