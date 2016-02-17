@@ -1,0 +1,81 @@
+package org.fidelovelabs.viabill.handler;
+
+import java.util.Map;
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+
+import org.apache.commons.collections.CollectionUtils;
+import org.fidelovelabs.viabill.model.CompanyBean;
+import org.fidelovelabs.viabill.model.HandlerResponseBean;
+
+public class UpdateCompanyDetailsRequestHandler extends AbstractRequestHandler {
+
+	public UpdateCompanyDetailsRequestHandler(Map<Long, CompanyBean> mapCompanies) {
+		super(mapCompanies);
+	}
+
+	@Override
+	protected HandlerResponseBean handle(Map<String, String> map, String body) {
+
+		HandlerResponseBean response;
+
+		try {
+
+			Long idCompany = Long.parseLong(map.get(":idCompany"));
+			CompanyBean companyBean = mapCompanies.get(idCompany);
+
+			if (companyBean != null) {
+
+				CompanyBean updateRequest = gson.fromJson(body, CompanyBean.class);
+
+				if (CollectionUtils.isNotEmpty(updateRequest.getBeneficiaOwner())) {
+					response = new HandlerResponseBean(400,
+							"{ error : \"Wrong Request: In order to update beneficial owners use addOwner\"}");
+
+				} else if (!isEmailValid(updateRequest.getEmail())) {
+					response = new HandlerResponseBean(400, "{ error : \"Wrong Request: Invalid Email Address\"}");
+
+				} else if (!isPhoneValid(updateRequest.getPhoneNumber())) {
+					response = new HandlerResponseBean(400, "{ error : \"Wrong Request: Invalid phone number\"}");
+
+				} else {
+
+					updateRequest.setIdCompany(idCompany);
+					updateRequest
+							.setName(updateRequest.getName() != null ? updateRequest.getName() : companyBean.getName());
+					updateRequest.setAddress(
+							updateRequest.getAddress() != null ? updateRequest.getAddress() : companyBean.getAddress());
+					updateRequest
+							.setCity(updateRequest.getCity() != null ? updateRequest.getCity() : companyBean.getCity());
+					updateRequest.setCountry(
+							updateRequest.getCountry() != null ? updateRequest.getCountry() : companyBean.getCountry());
+					updateRequest.setEmail(
+							updateRequest.getEmail() != null ? updateRequest.getEmail() : companyBean.getEmail());
+					updateRequest.setPhoneNumber(
+							updateRequest.getPhoneNumber() != null ? updateRequest.getEmail() : companyBean.getEmail());
+					updateRequest.setBeneficiaOwner(companyBean.getBeneficiaOwner());
+
+					Set<ConstraintViolation<CompanyBean>> validate = validator.validate(updateRequest);
+
+					if (validate.isEmpty()) {
+						mapCompanies.replace(idCompany, updateRequest);
+						response = new HandlerResponseBean(200, gson.toJson(companyBean, CompanyBean.class));
+
+					} else {
+						response = new HandlerResponseBean(400,
+								String.format("{ error : \"Wrong Request: Mandatory parameters missing : %s\"}",
+										getFieldsOnError(validate)));
+					}
+				}
+			} else {
+				response = new HandlerResponseBean(400, "{ error : \"Wrong Request: Company does not exist\"}");
+			}
+		} catch (NumberFormatException e) {
+			response = new HandlerResponseBean(400,
+					"{ error : \"Wrong Request: idCompany must be a numerical value\"}");
+		}
+		return response;
+	}
+
+}
