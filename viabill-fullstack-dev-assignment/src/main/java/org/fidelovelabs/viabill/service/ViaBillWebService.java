@@ -1,6 +1,8 @@
 package org.fidelovelabs.viabill.service;
 
+import static spark.Spark.before;
 import static spark.Spark.get;
+import static spark.Spark.options;
 import static spark.Spark.post;
 import static spark.Spark.put;
 import static spark.SparkBase.port;
@@ -8,9 +10,11 @@ import static spark.SparkBase.port;
 import java.util.Map;
 
 import org.fidelovelabs.viabill.handler.AddOwnerRequestHandler;
+import org.fidelovelabs.viabill.handler.BeforeRequestHandler;
 import org.fidelovelabs.viabill.handler.CreateCompanyRequestHandler;
 import org.fidelovelabs.viabill.handler.GetCompaniesRequestHandler;
 import org.fidelovelabs.viabill.handler.GetCompanyDetailsRequestHandler;
+import org.fidelovelabs.viabill.handler.OptionsRequestHandler;
 import org.fidelovelabs.viabill.handler.UpdateCompanyDetailsRequestHandler;
 import org.fidelovelabs.viabill.model.CompanyBean;
 
@@ -34,5 +38,9 @@ public class ViaBillWebService {
 		get("/getCompany/:idcompany", new GetCompanyDetailsRequestHandler(mapCompanies));
 		put("/updateCompany/:idcompany", new UpdateCompanyDetailsRequestHandler(mapCompanies));
 		put("/addOwner/:idcompany", new AddOwnerRequestHandler(mapCompanies));
+
+		// CORS habilitation
+		options("/*", new OptionsRequestHandler());
+		before(new BeforeRequestHandler());
 	}
 }
