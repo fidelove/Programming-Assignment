@@ -26,9 +26,13 @@ public class UpdateCompanyDetailsRequestHandler extends AbstractRequestHandler {
 
 			if (companyBean != null) {
 
-				CompanyBean updateRequest = gson.fromJson(body, CompanyBean.class);
+				CompanyBean updateRequest = fromJson(body, CompanyBean.class);
 
-				if (CollectionUtils.isNotEmpty(updateRequest.getBeneficiaOwner())) {
+				if (updateRequest == null) {
+					response = new HandlerResponseBean(400,
+							"{ error : \"Wrong Request: Request is not a valid JSON\"}");
+
+				} else if (CollectionUtils.isNotEmpty(updateRequest.getBeneficiaOwner())) {
 					response = new HandlerResponseBean(400,
 							"{ error : \"Wrong Request: In order to update beneficial owners use addOwner\"}");
 

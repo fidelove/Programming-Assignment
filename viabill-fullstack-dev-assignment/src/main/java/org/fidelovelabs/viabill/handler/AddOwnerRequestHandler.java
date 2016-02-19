@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.fidelovelabs.viabill.model.CompanyBean;
 import org.fidelovelabs.viabill.model.HandlerResponseBean;
 
@@ -29,23 +30,28 @@ public class AddOwnerRequestHandler extends AbstractRequestHandler {
 
 			Type listType = new TypeToken<ArrayList<String>>() {
 			}.getType();
-			List<String> newBeneficiaOwners = gson.fromJson(body, listType);
+			List<String> newBeneficiaOwners = fromJson(body, listType);
 
-			for (String newBeneficiaOwner : newBeneficiaOwners) {
-				if (!beneficiaOwner.contains(newBeneficiaOwner)) {
-					beneficiaOwner.add(newBeneficiaOwner);
-				} else {
-					response = new HandlerResponseBean(400, String
-							.format("{ error : \"Company already contains beneficial owner %s\"}", newBeneficiaOwner));
-					break;
+			if (CollectionUtils.isEmpty(newBeneficiaOwners)) {
+
+				for (String newBeneficiaOwner : newBeneficiaOwners) {
+					if (!beneficiaOwner.contains(newBeneficiaOwner)) {
+						beneficiaOwner.add(newBeneficiaOwner);
+					} else {
+						response = new HandlerResponseBean(400, String.format(
+								"{ error : \"Company already contains beneficial owner %s\"}", newBeneficiaOwner));
+						break;
+					}
 				}
-			}
 
-			if (response == null) {
-				companyBean.setBeneficiaOwner(beneficiaOwner);
-				mapCompanies.replace(companyBean.getIdCompany(), companyBean);
+				if (response == null) {
+					companyBean.setBeneficiaOwner(beneficiaOwner);
+					mapCompanies.replace(companyBean.getIdCompany(), companyBean);
 
-				response = new HandlerResponseBean(200, gson.toJson(companyBean, CompanyBean.class));
+					response = new HandlerResponseBean(200, gson.toJson(companyBean, CompanyBean.class));
+				}
+			} else {
+				response = new HandlerResponseBean(400, "{ error : \"Wrong Request: No valid beneficial owners\"}");
 			}
 
 		} else {

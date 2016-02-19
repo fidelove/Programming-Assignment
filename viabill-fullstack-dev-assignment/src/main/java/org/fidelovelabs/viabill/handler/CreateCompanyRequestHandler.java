@@ -28,28 +28,36 @@ public class CreateCompanyRequestHandler extends AbstractRequestHandler {
 
 		HandlerResponseBean response;
 
-		CompanyBean newCompany = gson.fromJson(body, CompanyBean.class);
-		Set<ConstraintViolation<CompanyBean>> validate = validator.validate(newCompany);
+		CompanyBean newCompany = fromJson(body, CompanyBean.class);
 
-		if (validate.isEmpty() && isEmailValid(newCompany.getEmail()) && isPhoneValid(newCompany.getPhoneNumber())) {
+		if (newCompany != null) {
 
-			newCompany.setIdCompany(idCompany.getAndIncrement());
-			mapCompanies.put(newCompany.getIdCompany(), newCompany);
+			Set<ConstraintViolation<CompanyBean>> validate = validator.validate(newCompany);
 
-			response = new HandlerResponseBean(200, String.format("{ idCompany : \"%d\"}", newCompany.getIdCompany()));
+			if (validate.isEmpty() && isEmailValid(newCompany.getEmail())
+					&& isPhoneValid(newCompany.getPhoneNumber())) {
 
-		} else {
-			if (!isEmailValid(newCompany.getEmail())) {
-				response = new HandlerResponseBean(400, "{ error : \"Wrong Request: Invalid Email Address\"}");
+				newCompany.setIdCompany(idCompany.getAndIncrement());
+				mapCompanies.put(newCompany.getIdCompany(), newCompany);
 
-			} else if (!isPhoneValid(newCompany.getPhoneNumber())) {
-				response = new HandlerResponseBean(400, "{ error : \"Wrong Request: Invalid phone number\"}");
+				response = new HandlerResponseBean(200,
+						String.format("{ idCompany : \"%d\"}", newCompany.getIdCompany()));
 
 			} else {
-				response = new HandlerResponseBean(400, String.format(
-						"{ error : \"Wrong Request: Mandatory parameters missing : %s\"}", getFieldsOnError(validate)));
+				if (!isEmailValid(newCompany.getEmail())) {
+					response = new HandlerResponseBean(400, "{ error : \"Wrong Request: Invalid Email Address\"}");
 
+				} else if (!isPhoneValid(newCompany.getPhoneNumber())) {
+					response = new HandlerResponseBean(400, "{ error : \"Wrong Request: Invalid phone number\"}");
+
+				} else {
+					response = new HandlerResponseBean(400,
+							String.format("{ error : \"Wrong Request: Mandatory parameters missing : %s\"}",
+									getFieldsOnError(validate)));
+				}
 			}
+		} else {
+			response = new HandlerResponseBean(400, "{ error : \"Wrong Request: Request is not a valid JSON\"}");
 		}
 
 		return response;

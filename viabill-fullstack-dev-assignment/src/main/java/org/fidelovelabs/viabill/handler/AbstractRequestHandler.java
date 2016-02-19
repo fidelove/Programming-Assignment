@@ -1,5 +1,6 @@
 package org.fidelovelabs.viabill.handler;
 
+import java.lang.reflect.Type;
 import java.util.Map;
 import java.util.Set;
 
@@ -14,6 +15,8 @@ import org.fidelovelabs.viabill.model.CompanyBean;
 import org.fidelovelabs.viabill.model.HandlerResponseBean;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonSyntaxException;
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 
@@ -77,12 +80,24 @@ public abstract class AbstractRequestHandler implements Route {
 
 	}
 
+	/**
+	 * @param jsonString
+	 * @return
+	 */
 	protected boolean isJSONValid(String jsonString) {
 		try {
 			gson.fromJson(jsonString, Object.class);
 			return true;
-		} catch (com.google.gson.JsonSyntaxException ex) {
+		} catch (JsonSyntaxException ex) {
 			return false;
+		}
+	}
+
+	protected <T> T fromJson(String json, Type typeOfT) {
+		try {
+			return gson.fromJson(json, typeOfT);
+		} catch (JsonParseException e) {
+			return null;
 		}
 	}
 
