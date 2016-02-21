@@ -41,7 +41,7 @@ public class CreateCompanyRequestHandler extends AbstractRequestHandler {
 				mapCompanies.put(newCompany.getIdCompany(), newCompany);
 
 				response = new HandlerResponseBean(200,
-						String.format("{ idCompany : \"%d\"}", newCompany.getIdCompany()));
+						String.format("{ \"idCompany\" : \"%d\"}", newCompany.getIdCompany()));
 
 			} else {
 				if (!isEmailValid(newCompany.getEmail())) {

@@ -32,7 +32,7 @@ public class AddOwnerRequestHandler extends AbstractRequestHandler {
 			}.getType();
 			List<String> newBeneficiaOwners = fromJson(body, listType);
 
-			if (CollectionUtils.isEmpty(newBeneficiaOwners)) {
+			if (CollectionUtils.isNotEmpty(newBeneficiaOwners)) {
 
 				for (String newBeneficiaOwner : newBeneficiaOwners) {
 					if (!beneficiaOwner.contains(newBeneficiaOwner)) {
