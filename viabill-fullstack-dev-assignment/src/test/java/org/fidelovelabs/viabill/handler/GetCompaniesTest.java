@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.fidelovelabs.viabill.model.BasicCompanyBean;
 import org.fidelovelabs.viabill.model.CompanyBean;
 import org.fidelovelabs.viabill.model.HandlerResponseBean;
 import org.junit.Before;
@@ -36,7 +37,7 @@ public class GetCompaniesTest {
 
 		assertEquals("No companies should be returned", 200, response.getStatus());
 
-		Type companyBeanType = new TypeToken<ArrayList<CompanyBean>>() {
+		Type companyBeanType = new TypeToken<ArrayList<BasicCompanyBean>>() {
 		}.getType();
 		List<CompanyBean> companies = gson.fromJson(response.getBody(), companyBeanType);
 		assertEquals("No companies should be returned", 0, companies.size());
@@ -53,7 +54,7 @@ public class GetCompaniesTest {
 
 		assertEquals("Request should be correct", 200, response.getStatus());
 
-		Type companyBeanType = new TypeToken<ArrayList<CompanyBean>>() {
+		Type companyBeanType = new TypeToken<ArrayList<BasicCompanyBean>>() {
 		}.getType();
 		List<CompanyBean> companies = gson.fromJson(response.getBody(), companyBeanType);
 		assertEquals("Only company should be returned", 1, companies.size());
@@ -72,7 +73,7 @@ public class GetCompaniesTest {
 
 		assertEquals("Request should be correct", 200, response.getStatus());
 
-		Type companyBeanType = new TypeToken<ArrayList<CompanyBean>>() {
+		Type companyBeanType = new TypeToken<ArrayList<BasicCompanyBean>>() {
 		}.getType();
 		List<CompanyBean> companies = gson.fromJson(response.getBody(), companyBeanType);
 		assertEquals("5 companies should be returned", 5, companies.size());

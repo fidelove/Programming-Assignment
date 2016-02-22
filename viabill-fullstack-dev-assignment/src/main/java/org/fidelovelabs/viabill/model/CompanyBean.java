@@ -1,18 +1,14 @@
 package org.fidelovelabs.viabill.model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-public class CompanyBean implements Serializable {
+public class CompanyBean extends BasicCompanyBean {
 
 	private static final long serialVersionUID = 8080727923661840629L;
 
-	private long idCompany;
-	@NotEmpty
-	private String name;
 	@NotEmpty
 	private String address;
 	@NotEmpty
@@ -51,22 +47,6 @@ public class CompanyBean implements Serializable {
 		this.email = email;
 		this.phoneNumber = phoneNumber;
 		this.beneficiaOwner = beneficiaOwner;
-	}
-
-	public long getIdCompany() {
-		return idCompany;
-	}
-
-	public void setIdCompany(long idCompany) {
-		this.idCompany = idCompany;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public String getAddress() {
@@ -186,8 +166,8 @@ public class CompanyBean implements Serializable {
 
 	@Override
 	public String toString() {
-		return "{idCompany=" + idCompany + ", name=" + name + ", address=" + address + ", city=" + city + ", country="
-				+ country + ", email=" + email + ", phoneNumber=" + phoneNumber + ", beneficiaOwner=" + beneficiaOwner
-				+ "}";
+		return String.format(
+				"CompanyBean [idCompany=%s, name=%s, address=%s, city=%s, country=%s, email=%s, phoneNumber=%s, beneficiaOwner=%s]",
+				idCompany, name, address, city, country, email, phoneNumber, beneficiaOwner);
 	}
 }
