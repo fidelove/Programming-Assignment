@@ -39,7 +39,7 @@ public class AddOwnerRequestHandler extends AbstractRequestHandler {
 						beneficiaOwner.add(newBeneficiaOwner);
 					} else {
 						response = new HandlerResponseBean(400, String.format(
-								"{ error : \"Company already contains beneficial owner %s\"}", newBeneficiaOwner));
+								"{ \"error\" : \"Company already contains beneficial owner %s\"}", newBeneficiaOwner));
 						break;
 					}
 				}
@@ -51,12 +51,12 @@ public class AddOwnerRequestHandler extends AbstractRequestHandler {
 					response = new HandlerResponseBean(200, gson.toJson(companyBean, CompanyBean.class));
 				}
 			} else {
-				response = new HandlerResponseBean(400, "{ error : \"Wrong Request: No valid beneficial owners\"}");
+				response = new HandlerResponseBean(400, "{ \"error\" : \"Wrong Request: No valid beneficial owners\"}");
 			}
 
 		} else {
 			response = new HandlerResponseBean(400,
-					"{ error : \"Company does not exist. Please send the correct idCompany\"}");
+					"{ \"error\" : \"Company does not exist. Please send the correct idCompany\"}");
 		}
 
 		return response;

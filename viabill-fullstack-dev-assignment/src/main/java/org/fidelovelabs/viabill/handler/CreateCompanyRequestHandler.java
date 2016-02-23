@@ -45,19 +45,19 @@ public class CreateCompanyRequestHandler extends AbstractRequestHandler {
 
 			} else {
 				if (!isEmailValid(newCompany.getEmail())) {
-					response = new HandlerResponseBean(400, "{ error : \"Wrong Request: Invalid Email Address\"}");
+					response = new HandlerResponseBean(400, "{ \"error\" : \"Wrong Request: Invalid Email Address\"}");
 
 				} else if (!isPhoneValid(newCompany.getPhoneNumber())) {
-					response = new HandlerResponseBean(400, "{ error : \"Wrong Request: Invalid phone number\"}");
+					response = new HandlerResponseBean(400, "{ \"error\" : \"Wrong Request: Invalid phone number\"}");
 
 				} else {
 					response = new HandlerResponseBean(400,
-							String.format("{ error : \"Wrong Request: Mandatory parameters missing : %s\"}",
+							String.format("{ \"error\" : \"Wrong Request: Mandatory parameters missing : %s\"}",
 									getFieldsOnError(validate)));
 				}
 			}
 		} else {
-			response = new HandlerResponseBean(400, "{ error : \"Wrong Request: Request is not a valid JSON\"}");
+			response = new HandlerResponseBean(400, "{ \"error\" : \"Wrong Request: Request is not a valid JSON\"}");
 		}
 
 		return response;

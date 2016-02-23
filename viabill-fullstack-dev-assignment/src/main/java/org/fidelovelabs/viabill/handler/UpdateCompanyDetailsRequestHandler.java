@@ -30,17 +30,17 @@ public class UpdateCompanyDetailsRequestHandler extends AbstractRequestHandler {
 
 				if (updateRequest == null) {
 					response = new HandlerResponseBean(400,
-							"{ error : \"Wrong Request: Request is not a valid JSON\"}");
+							"{ \"error\" : \"Wrong Request: Request is not a valid JSON\"}");
 
 				} else if (CollectionUtils.isNotEmpty(updateRequest.getBeneficiaOwner())) {
 					response = new HandlerResponseBean(400,
-							"{ error : \"Wrong Request: In order to update beneficial owners use addOwner\"}");
+							"{ \"error\" : \"Wrong Request: In order to update beneficial owners use addOwner\"}");
 
 				} else if (!isEmailValid(updateRequest.getEmail())) {
-					response = new HandlerResponseBean(400, "{ error : \"Wrong Request: Invalid Email Address\"}");
+					response = new HandlerResponseBean(400, "{ \"error\" : \"Wrong Request: Invalid Email Address\"}");
 
 				} else if (!isPhoneValid(updateRequest.getPhoneNumber())) {
-					response = new HandlerResponseBean(400, "{ error : \"Wrong Request: Invalid phone number\"}");
+					response = new HandlerResponseBean(400, "{ \"error\" : \"Wrong Request: Invalid phone number\"}");
 
 				} else {
 
@@ -67,7 +67,7 @@ public class UpdateCompanyDetailsRequestHandler extends AbstractRequestHandler {
 
 					} else {
 						response = new HandlerResponseBean(400,
-								String.format("{ error : \"Wrong Request: Mandatory parameters missing : %s\"}",
+								String.format("{ \"error\" : \"Wrong Request: Mandatory parameters missing : %s\"}",
 										getFieldsOnError(validate)));
 					}
 				}

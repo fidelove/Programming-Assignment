@@ -14,16 +14,16 @@ import org.apache.commons.validator.routines.EmailValidator;
 import org.fidelovelabs.viabill.model.CompanyBean;
 import org.fidelovelabs.viabill.model.HandlerResponseBean;
 
-import spark.Request;
-import spark.Response;
-import spark.Route;
-import spark.utils.StringUtils;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSyntaxException;
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
+
+import spark.Request;
+import spark.Response;
+import spark.Route;
+import spark.utils.StringUtils;
 
 public abstract class AbstractRequestHandler implements Route {
 
@@ -75,7 +75,7 @@ public abstract class AbstractRequestHandler implements Route {
 			return handlerResponse.getBody();
 
 		} else {
-			return "{ error : \"Request does not contain a valid JSON\"}";
+			return "{ \"error\" : \"Request does not contain a valid JSON\"}";
 		}
 
 	}

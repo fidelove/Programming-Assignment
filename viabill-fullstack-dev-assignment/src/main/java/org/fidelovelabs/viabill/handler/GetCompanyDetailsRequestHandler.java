@@ -22,7 +22,7 @@ public class GetCompanyDetailsRequestHandler extends AbstractRequestHandler {
 			response = new HandlerResponseBean(200, gson.toJson(companyBean, CompanyBean.class));
 		} else {
 			response = new HandlerResponseBean(400,
-					"{ error : \"Company does not exist. Please send the correct idCompany\"}");
+					"{ \"error\" : \"Company does not exist. Please send the correct idCompany\"}");
 		}
 
 		return response;
