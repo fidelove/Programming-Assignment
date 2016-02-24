@@ -1,7 +1,7 @@
-ViaBill Programming Assignment
+Programming Assignment
 =======
 
-This is the implementation of the Application Assigment proposed by ViaBill.
+This is the implementation of the Application Assigment.
 
 These frameworks have been used for developing the backend service:
 
