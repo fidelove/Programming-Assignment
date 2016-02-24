@@ -55,8 +55,8 @@ public class UpdateCompanyDetailsRequestHandler extends AbstractRequestHandler {
 							updateRequest.getCountry() != null ? updateRequest.getCountry() : companyBean.getCountry());
 					updateRequest.setEmail(
 							updateRequest.getEmail() != null ? updateRequest.getEmail() : companyBean.getEmail());
-					updateRequest.setPhoneNumber(
-							updateRequest.getPhoneNumber() != null ? updateRequest.getEmail() : companyBean.getEmail());
+					updateRequest.setPhoneNumber(updateRequest.getPhoneNumber() != null ? updateRequest.getPhoneNumber()
+							: companyBean.getPhoneNumber());
 					updateRequest.setBeneficiaOwner(companyBean.getBeneficiaOwner());
 
 					Set<ConstraintViolation<CompanyBean>> validate = validator.validate(updateRequest);

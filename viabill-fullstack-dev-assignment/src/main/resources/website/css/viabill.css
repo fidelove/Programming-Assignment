@@ -1,0 +1,55 @@
+﻿.tabsDynamicHeight md-content {
+  background-color: transparent !important; }
+
+.tabsDynamicHeight md-content md-tabs {
+    background: #f6f6f6;
+    border: 1px solid #e1e1e1; }
+
+.tabsDynamicHeight md-content md-tabs md-tabs-wrapper {
+      background: white; }
+
+.tabsDynamicHeight md-content h1:first-child {
+    margin-top: 0; }
+
+.companyForm .inputErrorsApp {
+  min-height: 48px; }
+
+.companyForm md-input-container > p {
+  font-size: 0.8em;
+  text-align: left;
+  width: 100%; }
+
+.companyForm .hint {
+    position: absolute;
+    left: 2px;
+    right: auto;
+    bottom: 7px;
+    /* Copy styles from ng-messages */
+    font-size: 12px;
+    line-height: 14px;
+    transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
+    /* Set our own color */
+    color: grey; }
+
+.companyForm .hint.ng-hide,
+
+.companyForm .hint.ng-enter,
+
+.companyForm .hint.ng-leave.ng-leave-active {
+    bottom: 26px;
+    opacity: 0; }
+.companyForm .hint.ng-leave,
+
+.companyForm .hint.ng-enter.ng-enter-active {
+    bottom: 7px;
+    opacity: 1;}
+
+.animate-hide {
+    transition: all linear 0.5s;
+    line-height: 20px;
+    opacity: 1;}
+
+.animate-hide.ng-hide {
+    line-height: 0;
+    opacity: 0;
+    padding: 0 10px;}
