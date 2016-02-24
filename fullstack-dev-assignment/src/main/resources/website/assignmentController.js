@@ -1,4 +1,4 @@
-viabillApp.controller('viabillCtrl', function($scope, $http, $mdDialog, $mdConstant) {
+assignmentApp.controller('assignmentCtrl', function($scope, $http, $mdDialog, $mdConstant) {
 
 	$scope.allCompanies = [];
 	$scope.getCompanyDetails = null;

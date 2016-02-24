@@ -1,4 +1,4 @@
-package org.fidelovelabs.viabill.handler;
+package org.fidelovelabs.assignment.handler;
 
 import java.lang.reflect.Type;
 import java.util.Map;
@@ -11,8 +11,8 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
 import org.apache.commons.validator.routines.EmailValidator;
-import org.fidelovelabs.viabill.model.CompanyBean;
-import org.fidelovelabs.viabill.model.HandlerResponseBean;
+import org.fidelovelabs.assignment.model.CompanyBean;
+import org.fidelovelabs.assignment.model.HandlerResponseBean;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
@@ -59,7 +59,7 @@ public abstract class AbstractRequestHandler implements Route {
 	 * @ @param
 	 *       body {@link java.lang.String} JSON formatted string containing the
 	 *       body of the HTTP request
-	 * @return {@link org.fidelovelabs.viabill.model.HandlerResponseBean} Object
+	 * @return {@link org.fidelovelabs.assignment.model.HandlerResponseBean} Object
 	 *         containing the HTTP response code and body
 	 */
 	protected abstract HandlerResponseBean handle(Map<String, String> map, String body);
@@ -102,7 +102,7 @@ public abstract class AbstractRequestHandler implements Route {
 	}
 
 	/**
-	 * Returns the {@link org.fidelovelabs.viabill.model.CompanyBean} linked by
+	 * Returns the {@link org.fidelovelabs.assignment.model.CompanyBean} linked by
 	 * the parameter <i>:idCompany</i> stored in the {@link java.util.Map}, or
 	 * null if no company exists with this idCompany
 	 * 

@@ -1,4 +1,4 @@
-package org.fidelovelabs.viabill.handler;
+package org.fidelovelabs.assignment.handler;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -9,9 +9,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.easymock.EasyMock;
-import org.fidelovelabs.viabill.mock.IdCompanyMock;
-import org.fidelovelabs.viabill.model.CompanyBean;
-import org.fidelovelabs.viabill.model.HandlerResponseBean;
+import org.fidelovelabs.assignment.handler.CreateCompanyRequestHandler;
+import org.fidelovelabs.assignment.mock.IdCompanyMock;
+import org.fidelovelabs.assignment.model.CompanyBean;
+import org.fidelovelabs.assignment.model.HandlerResponseBean;
 import org.junit.Before;
 import org.junit.Test;
 

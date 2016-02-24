@@ -1,4 +1,4 @@
-package org.fidelovelabs.viabill.mock;
+package org.fidelovelabs.assignment.mock;
 
 import com.hazelcast.core.IAtomicLong;
 import com.hazelcast.core.IFunction;

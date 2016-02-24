@@ -1,4 +1,4 @@
-package org.fidelovelabs.viabill.service;
+package org.fidelovelabs.assignment.service;
 
 import static spark.Spark.before;
 import static spark.Spark.get;
@@ -9,21 +9,21 @@ import static spark.SparkBase.port;
 
 import java.util.Map;
 
-import org.fidelovelabs.viabill.handler.AddOwnerRequestHandler;
-import org.fidelovelabs.viabill.handler.BeforeRequestHandler;
-import org.fidelovelabs.viabill.handler.CreateCompanyRequestHandler;
-import org.fidelovelabs.viabill.handler.GetCompaniesRequestHandler;
-import org.fidelovelabs.viabill.handler.GetCompanyDetailsRequestHandler;
-import org.fidelovelabs.viabill.handler.OptionsRequestHandler;
-import org.fidelovelabs.viabill.handler.UpdateCompanyDetailsRequestHandler;
-import org.fidelovelabs.viabill.model.CompanyBean;
+import org.fidelovelabs.assignment.handler.AddOwnerRequestHandler;
+import org.fidelovelabs.assignment.handler.BeforeRequestHandler;
+import org.fidelovelabs.assignment.handler.CreateCompanyRequestHandler;
+import org.fidelovelabs.assignment.handler.GetCompaniesRequestHandler;
+import org.fidelovelabs.assignment.handler.GetCompanyDetailsRequestHandler;
+import org.fidelovelabs.assignment.handler.OptionsRequestHandler;
+import org.fidelovelabs.assignment.handler.UpdateCompanyDetailsRequestHandler;
+import org.fidelovelabs.assignment.model.CompanyBean;
 
 import com.hazelcast.config.Config;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.IAtomicLong;
 
-public class ViaBillWebService {
+public class AssignmentWebService {
 
 	public static void main(String[] args) {
 		Config config = new Config();

@@ -1,4 +1,4 @@
-package org.fidelovelabs.viabill.model;
+package org.fidelovelabs.assignment.model;
 
 import java.util.ArrayList;
 import java.util.List;

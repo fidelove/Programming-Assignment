@@ -1,12 +1,12 @@
-package org.fidelovelabs.viabill.handler;
+package org.fidelovelabs.assignment.handler;
 
 import java.util.Map;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
 
-import org.fidelovelabs.viabill.model.CompanyBean;
-import org.fidelovelabs.viabill.model.HandlerResponseBean;
+import org.fidelovelabs.assignment.model.CompanyBean;
+import org.fidelovelabs.assignment.model.HandlerResponseBean;
 
 import com.hazelcast.core.IAtomicLong;
 

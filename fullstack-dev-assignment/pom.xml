@@ -1,8 +1,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.fidelovelabs.viabill</groupId>
-	<artifactId>viabill-fullstack-dev-assignment</artifactId>
+	<groupId>org.fidelovelabs.assignment</groupId>
+	<artifactId>fullstack-dev-assignment</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
 	<dependencies>
@@ -72,7 +72,7 @@
 				<artifactId>exec-maven-plugin</artifactId>
 				<version>1.2.1</version>
 				<configuration>
-					<mainClass>org.fidelovelabs.viabill.service.ViaBillWebService</mainClass>
+					<mainClass>org.fidelovelabs.assignment.service.AssignmentWebService</mainClass>
 					<arguments></arguments>
 				</configuration>
 			</plugin>
