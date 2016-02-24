@@ -104,7 +104,7 @@ assignmentApp.controller('assignmentCtrl', function($scope, $http, $mdDialog, $m
 
 		var updateCompanyWithoutBeneficiaOwner = angular.copy($scope.updateCompany);
 		updateCompanyWithoutBeneficiaOwner.beneficiaOwner = null;
-	
+
 		$http.put(
 			'http://localhost:9090/updateCompany/' + $scope.selectedCompanyUpdate,
 			updateCompanyWithoutBeneficiaOwner
@@ -125,7 +125,7 @@ assignmentApp.controller('assignmentCtrl', function($scope, $http, $mdDialog, $m
 				$scope.retrieveAllCompanies();
 			}
 
-			if($scope.getCompanyDetails != null && updateCompanyDetailsOldName != $scope.getCompanyDetails.name) {
+			if($scope.getCompanyDetails != null && $scope.updateCompany.name != $scope.getCompanyDetails.name) {
 				$scope.getCompanyDetails = null;
 			}
 		}, function(response) {
@@ -157,12 +157,14 @@ assignmentApp.controller('assignmentCtrl', function($scope, $http, $mdDialog, $m
 
 			if($scope.selectedCompanyDetails == $scope.selectedCompanyAddBenefitial) {
 				$scope.getCompanyDetails = null;
+				$scope.selectedCompanyDetails = null;
 			}
-			
+
 			if($scope.selectedCompanyUpdate == $scope.selectedCompanyAddBenefitial) {
 				$scope.updateCompany = null;
+				$scope.selectedCompanyUpdate = null;
 			}
-			
+
 		}, function(response) {
 			$mdDialog.show(
 				$mdDialog.alert()
@@ -177,6 +179,6 @@ assignmentApp.controller('assignmentCtrl', function($scope, $http, $mdDialog, $m
 
 	$scope.cleanAddOwnersToCompany = function() {
 		$scope.addBenefitialOwners = [];
-		$scope.companyAddBenefitial = null;
+		$scope.selectedCompanyAddBenefitial = null;
     }
 });
