@@ -1,6 +1,7 @@
 package org.fidelovelabs.assignment.handler;
 
 import java.lang.reflect.Type;
+import java.util.Date;
 import java.util.Map;
 import java.util.Set;
 
@@ -13,6 +14,8 @@ import javax.validation.ValidatorFactory;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.fidelovelabs.assignment.model.CompanyBean;
 import org.fidelovelabs.assignment.model.HandlerResponseBean;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
@@ -27,6 +30,8 @@ import spark.utils.StringUtils;
 
 public abstract class AbstractRequestHandler implements Route {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(AbstractRequestHandler.class.getName());
+
 	protected Map<Long, CompanyBean> mapCompanies;
 	protected Validator validator;
 	protected Gson gson = new Gson();
@@ -34,7 +39,7 @@ public abstract class AbstractRequestHandler implements Route {
 	protected PhoneNumberUtil phoneValidator = PhoneNumberUtil.getInstance();
 
 	/**
-	 * Construcotr, which initialises the bean validator
+	 * Constructor, which initialises the bean validator
 	 * 
 	 * @param mapCompanies
 	 *            {@link java.util.Map} containing database information
@@ -59,8 +64,8 @@ public abstract class AbstractRequestHandler implements Route {
 	 * @ @param
 	 *       body {@link java.lang.String} JSON formatted string containing the
 	 *       body of the HTTP request
-	 * @return {@link org.fidelovelabs.assignment.model.HandlerResponseBean} Object
-	 *         containing the HTTP response code and body
+	 * @return {@link org.fidelovelabs.assignment.model.HandlerResponseBean}
+	 *         Object containing the HTTP response code and body
 	 */
 	protected abstract HandlerResponseBean handle(Map<String, String> map, String body);
 
@@ -69,12 +74,16 @@ public abstract class AbstractRequestHandler implements Route {
 
 		if (isJSONValid(request.body())) {
 
+			logInfo(LOGGER, String.format("New request received: parameters : %s body : %s ",
+					request.params().toString(), request.body()));
+
 			HandlerResponseBean handlerResponse = handle(request.params(), request.body());
 			response.status(handlerResponse.getStatus());
 			response.body(handlerResponse.getBody());
 			return handlerResponse.getBody();
 
 		} else {
+			logError(LOGGER, "Request does not contain a valid JSON");
 			return "{ \"error\" : \"Request does not contain a valid JSON\"}";
 		}
 
@@ -102,9 +111,9 @@ public abstract class AbstractRequestHandler implements Route {
 	}
 
 	/**
-	 * Returns the {@link org.fidelovelabs.assignment.model.CompanyBean} linked by
-	 * the parameter <i>:idCompany</i> stored in the {@link java.util.Map}, or
-	 * null if no company exists with this idCompany
+	 * Returns the {@link org.fidelovelabs.assignment.model.CompanyBean} linked
+	 * by the parameter <i>:idCompany</i> stored in the {@link java.util.Map},
+	 * or null if no company exists with this idCompany
 	 * 
 	 * @param map
 	 *            {@link java.util.Map} containing the route parameters in the
@@ -172,5 +181,17 @@ public abstract class AbstractRequestHandler implements Route {
 		StringBuilder errorFields = new StringBuilder();
 		violations.forEach((violation) -> errorFields.append(violation.getPropertyPath()).append(", "));
 		return errorFields.substring(0, errorFields.length() - 2);
+	}
+
+	protected void logInfo(Logger logger, String log) {
+		if (logger.isInfoEnabled()) {
+			logger.info(String.format("%s " + log, new Date().toString()));
+		}
+	}
+
+	protected void logError(Logger logger, String log) {
+		if (logger.isErrorEnabled()) {
+			logger.error(String.format("%s " + log, new Date().toString()));
+		}
 	}
 }

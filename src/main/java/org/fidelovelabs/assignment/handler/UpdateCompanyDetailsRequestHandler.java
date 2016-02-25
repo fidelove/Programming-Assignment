@@ -8,8 +8,12 @@ import javax.validation.ConstraintViolation;
 import org.apache.commons.collections.CollectionUtils;
 import org.fidelovelabs.assignment.model.CompanyBean;
 import org.fidelovelabs.assignment.model.HandlerResponseBean;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class UpdateCompanyDetailsRequestHandler extends AbstractRequestHandler {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(UpdateCompanyDetailsRequestHandler.class.getName());
 
 	public UpdateCompanyDetailsRequestHandler(Map<Long, CompanyBean> mapCompanies) {
 		super(mapCompanies);
@@ -17,6 +21,8 @@ public class UpdateCompanyDetailsRequestHandler extends AbstractRequestHandler {
 
 	@Override
 	protected HandlerResponseBean handle(Map<String, String> map, String body) {
+
+		logInfo(LOGGER, "Update Company Details request");
 
 		HandlerResponseBean response;
 
@@ -29,17 +35,21 @@ public class UpdateCompanyDetailsRequestHandler extends AbstractRequestHandler {
 				CompanyBean updateRequest = fromJson(body, CompanyBean.class);
 
 				if (updateRequest == null) {
+					logError(LOGGER, "Wrong Request: Request is not a valid JSON");
 					response = new HandlerResponseBean(400,
 							"{ \"error\" : \"Wrong Request: Request is not a valid JSON\"}");
 
 				} else if (CollectionUtils.isNotEmpty(updateRequest.getBeneficiaOwner())) {
+					logError(LOGGER, "Wrong Request: In order to update beneficial owners use addOwner");
 					response = new HandlerResponseBean(400,
 							"{ \"error\" : \"Wrong Request: In order to update beneficial owners use addOwner\"}");
 
 				} else if (!isEmailValid(updateRequest.getEmail())) {
+					logError(LOGGER, "Wrong Request: Invalid Email Address");
 					response = new HandlerResponseBean(400, "{ \"error\" : \"Wrong Request: Invalid Email Address\"}");
 
 				} else if (!isPhoneValid(updateRequest.getPhoneNumber())) {
+					logError(LOGGER, "Wrong Request: Invalid phone number");
 					response = new HandlerResponseBean(400, "{ \"error\" : \"Wrong Request: Invalid phone number\"}");
 
 				} else {
@@ -62,22 +72,30 @@ public class UpdateCompanyDetailsRequestHandler extends AbstractRequestHandler {
 					Set<ConstraintViolation<CompanyBean>> validate = validator.validate(updateRequest);
 
 					if (validate.isEmpty()) {
+						logInfo(LOGGER, "Update Company Details request succeed");
 						mapCompanies.replace(updateRequest.getIdCompany(), updateRequest);
 						response = new HandlerResponseBean(200, gson.toJson(updateRequest, CompanyBean.class));
 
 					} else {
-						response = new HandlerResponseBean(400,
-								String.format("{ \"error\" : \"Wrong Request: Mandatory parameters missing : %s\"}",
-										getFieldsOnError(validate)));
+						String fieldsOnError = getFieldsOnError(validate);
+
+						logError(LOGGER,
+								String.format("Wrong Request: Mandatory parameters missing %s", fieldsOnError));
+						response = new HandlerResponseBean(400, String.format(
+								"{ \"error\" : \"Wrong Request: Mandatory parameters missing : %s\"}", fieldsOnError));
 					}
 				}
 			} else {
+				logError(LOGGER, "Wrong Request: Company does not exist");
 				response = new HandlerResponseBean(400, "{ error : \"Wrong Request: Company does not exist\"}");
 			}
 		} catch (NumberFormatException e) {
+			logError(LOGGER, "Wrong Request: idCompany must be a numerical value");
 			response = new HandlerResponseBean(400,
 					"{ error : \"Wrong Request: idCompany must be a numerical value\"}");
 		}
+
+		logInfo(LOGGER, "Update Company Details request finished");
 		return response;
 	}
 
