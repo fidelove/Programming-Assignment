@@ -1,1 +1,1 @@
-web:    java -cp "target/classes:target/dependency/*" org.fidelovelabs.assignment.service.AssignmentWebService
+web:    mvn exec:java -Dexec.mainClass="org.fidelovelabs.assignment.service.AssignmentWebService"

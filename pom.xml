@@ -67,15 +67,6 @@
 					<encoding>${project.build.sourceEncoding}</encoding>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
-				<version>1.2.1</version>
-				<configuration>
-					<mainClass>org.fidelovelabs.assignment.service.AssignmentWebService</mainClass>
-					<arguments></arguments>
-				</configuration>
-			</plugin>
 		</plugins>
 	</build>
 </project>
