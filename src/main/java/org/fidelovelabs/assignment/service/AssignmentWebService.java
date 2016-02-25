@@ -6,6 +6,7 @@ import static spark.Spark.options;
 import static spark.Spark.post;
 import static spark.Spark.put;
 import static spark.SparkBase.port;
+import static spark.SparkBase.staticFileLocation;
 
 import java.util.Map;
 
@@ -33,6 +34,9 @@ public class AssignmentWebService {
 
 		port(9090);
 
+		// form web
+		staticFileLocation("/website");
+
 		post("/createCompany", new CreateCompanyRequestHandler(mapCompanies, idCompany));
 		get("/getCompanies", new GetCompaniesRequestHandler(mapCompanies));
 		get("/getCompany/:idcompany", new GetCompanyDetailsRequestHandler(mapCompanies));
@@ -42,5 +46,6 @@ public class AssignmentWebService {
 		// CORS habilitation
 		options("/*", new OptionsRequestHandler());
 		before(new BeforeRequestHandler());
+
 	}
 }
