@@ -1,1 +1,1 @@
-web:    java $JAVA_OPTS -cp target/classes org.fidelovelabs.assignment.service.AssignmentWebService
+web:    java -cp target/classes:target/dependency/* org.fidelovelabs.assignment.service.AssignmentWebService
