@@ -1,1 +1,0 @@
-web:    mvn exec:java -Dexec.mainClass="org.fidelovelabs.assignment.service.AssignmentWebService"
