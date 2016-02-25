@@ -22,7 +22,7 @@ assignmentApp.controller('assignmentCtrl', function($scope, $http, $mdDialog, $m
 							'beneficiaOwner' : [$scope.createCompany.beneficiaOwner.trim(',')]
 							};
 		$http.post(
-			'http://localhost:9090/createCompany',
+			'https://fidelove-app.herokuapp.com/createCompany',
 			newCompany
 		).then(function(response) {
 			var result = response.data;
@@ -52,7 +52,7 @@ assignmentApp.controller('assignmentCtrl', function($scope, $http, $mdDialog, $m
 		if($scope.allCompanies.length == 0){
 
 			$http.get(
-				'http://localhost:9090/getCompanies'
+				'https://fidelove-app.herokuapp.com/getCompanies'
   			).then(function(response) {
 				$scope.allCompanies = response.data;
   			}, function(response) {
@@ -85,7 +85,7 @@ assignmentApp.controller('assignmentCtrl', function($scope, $http, $mdDialog, $m
 
 	retrieveCompany = function(idCompany, callback) {
 		$http.get(
-			'http://localhost:9090/getCompany/' + idCompany
+			'https://fidelove-app.herokuapp.com/getCompany/' + idCompany
 		).then(function(response) {
 			callback(response.data)
 		}, function(response) {
@@ -106,7 +106,7 @@ assignmentApp.controller('assignmentCtrl', function($scope, $http, $mdDialog, $m
 		updateCompanyWithoutBeneficiaOwner.beneficiaOwner = null;
 
 		$http.put(
-			'http://localhost:9090/updateCompany/' + $scope.selectedCompanyUpdate,
+			'https://fidelove-app.herokuapp.com/updateCompany/' + $scope.selectedCompanyUpdate,
 			updateCompanyWithoutBeneficiaOwner
 		).then(function(response) {
 			var result = response.data;
@@ -143,7 +143,7 @@ assignmentApp.controller('assignmentCtrl', function($scope, $http, $mdDialog, $m
 
 	$scope.addOwnersToCompany = function() {
 		$http.put(
-			'http://localhost:9090/addOwner/' + $scope.selectedCompanyAddBenefitial,
+			'https://fidelove-app.herokuapp.com/addOwner/' + $scope.selectedCompanyAddBenefitial,
 			$scope.addBenefitialOwners
 		).then(function(response) {
 			$mdDialog.show(

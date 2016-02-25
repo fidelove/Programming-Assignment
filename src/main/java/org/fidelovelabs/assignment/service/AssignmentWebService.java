@@ -32,7 +32,7 @@ public class AssignmentWebService {
 		Map<Long, CompanyBean> mapCompanies = instance.getMap("companies");
 		IAtomicLong idCompany = instance.getAtomicLong("idCompany");
 
-		port(9090);
+		port(Integer.parseInt(System.getenv("PORT")));
 
 		// form web
 		staticFileLocation("/website");

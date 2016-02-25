@@ -34,7 +34,7 @@ The body of this request must contain the company fields in JSON format.
 The resource can be invoked via this curl command:
 
 ``` sh
-curl -H "Content-Type: application/json" -X POST -d '{"name":"name", "address":"address", "city":"city", "country":"country", "email" : "mail@mail.com", "phoneNumber" : "20-21-22-23", "beneficiaOwner":["owner1", "owner2"]}' http://localhost:9090/createCompany
+curl -H "Content-Type: application/json" -X POST -d '{"name":"name", "address":"address", "city":"city", "country":"country", "email" : "mail@mail.com", "phoneNumber" : "20-21-22-23", "beneficiaOwner":["owner1", "owner2"]}' https://fidelove-app.herokuapp.com/createCompany
 ```
 
 The service will return the idCompany, which can be considered the unique identifier for this company, and will be a numeric value.
@@ -51,7 +51,7 @@ In order to get all the companies a GET HTTP request must be executed.
 The resource can be invoked via this curl command:
 
 ``` sh
-curl http://localhost:9090/getCompanies
+curl https://fidelove-app.herokuapp.com/getCompanies
 ```
 
 The result of invoking this resource is:
@@ -86,7 +86,7 @@ As mentioned before, the *idCompany* is a numeric value.
 The resource can be invoked via this curl command:
 
 ``` sh
-curl  http://localhost:9090/getCompany/0
+curl  https://fidelove-app.herokuapp.com/getCompany/0
 ```
 
 The service will return the idCompany, which can be considered the unique identifier for this company.
@@ -115,7 +115,7 @@ An optional field can be erased if sending an empty string as value.
 The resource can be invoked via this curl command:
 
 ``` sh
-curl -H "Content-Type: application/json" -X PUT -d '{"name":"not as awesome as promised company", "address":"moved to a not as awesome street"}' http://localhost:9090/updateCompany/0
+curl -H "Content-Type: application/json" -X PUT -d '{"name":"not as awesome as promised company", "address":"moved to a not as awesome street"}' https://fidelove-app.herokuapp.com/updateCompany/0
 ```
 
 The service will return the detailed company information with the requested modifications:
@@ -141,7 +141,7 @@ The body of this request must contain the new beneficial owner into a JSON list.
 The resource can be invoked via this curl command:
 
 ``` sh
-curl -H "Content-Type: application/json" -X PUT -d '["new fullstack developer"]' http://localhost:9090/addOwner/0
+curl -H "Content-Type: application/json" -X PUT -d '["new fullstack developer"]' https://fidelove-app.herokuapp.com/addOwner/0
 ```
 
 The service will return the detailed company information with the new beneficial owners:
